@@ -7,7 +7,7 @@ namespace EX02
         static void Main(string[] args)
         {
             BankCard mycard = new BankCard(100, "Maestro");
-            mycard.SetCardNumber("21231234");
+            mycard.SetCardNumber("21233234");
             mycard.PrintCardType();
             mycard.PrintAccountBalance();
             mycard.IncreaseAccountBalance(200);

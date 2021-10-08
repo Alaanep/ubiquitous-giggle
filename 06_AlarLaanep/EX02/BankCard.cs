@@ -9,10 +9,7 @@ namespace EX02
         private string _cardType;
         private string _cardNumber;
 
-        public double AccountBalance {
-            get {return _accountBalance;}
-            set {_accountBalance = value ; }
-        }
+       
         //set cardtype value if Maestro or Visa, else default to empty string
         public string CardType {
             get {return _cardType; }
@@ -25,31 +22,12 @@ namespace EX02
                 }
             }
         }
-        //set cardnumber value if its length is 8, else default to empty string
-        public string CardNumber {
-            get {return _cardNumber; }
-            set { if (value.Length == 8) {
-                    if (value.All(Char.IsDigit))
-                    {
-                        _cardNumber = value;
-                    }
-                    else
-                    {
-                        Console.WriteLine($"From c: Invalid value, card number has to be all digits");
-                        _cardNumber = string.Empty; ;
-                    }
-                } else
-                {
-                    Console.WriteLine("Card number length must be 8 and all digits. Defaulted to empty string");
-                    _cardNumber = string.Empty;
-                }
-            }
-        }
+        
 
         //default constructor sets accountbalance to 0 and card type to Visa
         public BankCard()
         {
-            AccountBalance = 0;
+            _accountBalance = 0;
             CardType = "Visa";
         }
 
@@ -57,7 +35,7 @@ namespace EX02
         //cardType according to constructors parameters
         public BankCard(double balance, string cardType)
         {
-            AccountBalance = balance;
+            _accountBalance = balance;
             CardType = cardType;
         }
         //Set card number, takes card number as parameter and prints it. If card number length !=8
@@ -68,8 +46,8 @@ namespace EX02
             {
                 if (cardNumber.All(char.IsDigit))
                 {
-                    CardNumber = cardNumber;
-                    Console.WriteLine($"Card number is set to {CardNumber}");
+                    _cardNumber = cardNumber;
+                    Console.WriteLine($"Card number is set to {_cardNumber}");
                 }
                 else
                 {
@@ -96,31 +74,31 @@ namespace EX02
         //print out accountbalance
         public void PrintAccountBalance()
         {
-            Console.WriteLine(AccountBalance);
+            Console.WriteLine(_accountBalance);
         }
 
         //get account balance
         public double GetAccountBalance()
         {
-            return AccountBalance;
+            return _accountBalance;
         }
 
         //increase account balance, amount to add is the parameter
         public void IncreaseAccountBalance(double amount)
         {
-            AccountBalance += amount;
+            _accountBalance += amount;
         }
 
         //decrease account balance, amount to decrease is the parameter.
         //if balance is smaller than 0, display error and cancel
         public void DecreaseAccountBalance(double amount)
         {
-            if (AccountBalance - amount < 0)
+            if (_accountBalance - amount < 0)
             {
                 Console.WriteLine("Cannot do this operation, insufficient funds, accountbalance is not changed");
             }else
             {
-                AccountBalance -= amount;
+                _accountBalance -= amount;
             }
         }
     }

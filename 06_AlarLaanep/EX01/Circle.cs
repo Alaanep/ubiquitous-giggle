@@ -7,19 +7,6 @@ namespace EX01
         private double _radius;
         private double _diameter;
 
-        //properties
-        //if radius <=0, default to 0
-        public double Radius {
-            get { return _radius; }
-            //set { _radius = value; }
-            set { _radius = value <= 0 ? 0: value ; }
-        }
-        //if diameter <=0, default to 0
-        public double Diameter {
-            get {return _diameter; }
-            set { _diameter = value <= 0 ? 0: value ; }
-        }
-
         //default constructor
         public Circle()
         {
@@ -29,19 +16,19 @@ namespace EX01
         //constructor for setting radius and diameter value
         public Circle(double radius)
         {
-            Radius = radius;
-            Diameter = radius * 2;
+            _radius = radius;
+            _diameter = radius * 2;
         }
 
         //print info about radius and diameter
         public void PrintInfo()
         {
-            if (Radius <= 0 || Diameter <= 0)
+            if (_radius <= 0 || _diameter <= 0)
             {
                 Console.WriteLine("Values are not set");
             } else
             {
-                Console.WriteLine($"Circle radius is {Radius} and circle diameter in {Diameter}");
+                Console.WriteLine($"Circle radius is {_radius} and circle diameter in {_diameter}");
             } 
         }
 
@@ -51,8 +38,8 @@ namespace EX01
         {
             if (radius > 0)
             {
-                Radius = radius;
-                Diameter = radius * 2;
+                _radius = radius;
+                _diameter = radius * 2;
                 PrintInfo();
             }else
             {
@@ -67,8 +54,8 @@ namespace EX01
         {
             if(diameter > 0)
             {
-                Radius = diameter / 2;
-                Diameter = diameter;
+                _radius = diameter / 2;
+                _diameter = diameter;
                 PrintInfo();
             } else
             {
@@ -80,10 +67,10 @@ namespace EX01
         //calculate and print circle area, round to 2 decimal places
         public void CalcAndPrintArea()
         {
-            if (Radius > 0)
+            if (_radius > 0)
             {
 
-                double area = Math.Round(Math.PI * (Radius * Radius), 2);
+                double area = Math.Round(Math.PI * (_radius * _radius), 2);
                 Console.WriteLine($"Circle area is {area}");
             } else
             {
@@ -94,9 +81,9 @@ namespace EX01
         //calculate and print circle circumference, round to 2 decimal places
         public void CalcAndPrintCircumference()
         {
-            if (Radius > 0)
+            if (_radius > 0)
             {
-                double circumference = 2 * Math.PI * Radius;
+                double circumference = 2 * Math.PI * _radius;
                 Console.WriteLine($"Circle circumference is {circumference}");
             } else
             {
