@@ -8,7 +8,6 @@ namespace EX02
         private double _accountBalance;
         private string _cardType;
         private string _cardNumber;
-
        
         //set cardtype value if Maestro or Visa, else default to empty string
         public string CardType {
@@ -22,7 +21,6 @@ namespace EX02
                 }
             }
         }
-        
 
         //default constructor sets accountbalance to 0 and card type to Visa
         public BankCard()
@@ -56,7 +54,7 @@ namespace EX02
                 
             } else
             {
-                Console.WriteLine($"Invalid value, the length has to be 8 and all digits");
+                Console.WriteLine($"Invalid value, the length has to be 8!");
             }
         }
         //print out cardtype

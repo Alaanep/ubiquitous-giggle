@@ -48,7 +48,7 @@ namespace EX01
             
         }
 
-        //setting radius - take diameter as parameter and sets value for radius and diameter.
+        //setting diameter - take diameter as parameter and sets value for radius and diameter.
         //If values are set,info method is called
         public void SetDiameter(double diameter)
         {
@@ -59,7 +59,7 @@ namespace EX01
                 PrintInfo();
             } else
             {
-                Console.WriteLine("Diameter shoulde be > 0");
+                Console.WriteLine("Diameter should be > 0");
             }
             
         }
@@ -69,7 +69,6 @@ namespace EX01
         {
             if (_radius > 0)
             {
-
                 double area = Math.Round(Math.PI * (_radius * _radius), 2);
                 Console.WriteLine($"Circle area is {area}");
             } else

@@ -1,12 +1,14 @@
-﻿<Properties StartupConfiguration="{31D08319-E25F-43CF-9A6A-B122F1DD9A0B}|Default">
-  <MonoDevelop.Ide.Workbench>
+﻿<Properties StartupConfiguration="{68EBE332-09A0-4F6A-9D43-17D111A2DDF3}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="EX3/Program.cs">
+    <Files>
+      <File FileName="EX3/Program.cs" Line="1" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="02_AlarLaanep" expanded="True">
-            <Node name="EX5" expanded="True">
-              <Node name="Program.cs" selected="True" />
-            </Node>
+            <Node name="EX2" expanded="True" />
+            <Node name="EX5" expanded="True" />
           </Node>
         </State>
       </Pad>
