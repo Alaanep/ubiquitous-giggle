@@ -17,16 +17,11 @@ namespace EX01
             foreach(IIronMachine i in irons)
             {
                 i.TurnOn();
-                //i.UseSteam();
-                i.DoIroning(180);
-                //i.UseSteam();   
-                //i.UseSteam();
-                i.DoIroning(180);
-               // i.UseSteam();
-                i.DoIroning(180);
-                //i.UseSteam();
-                i.DoIroning(180);
-                //i.UseSteam();
+                i.DoIroning("Cotton");
+                i.UseSteam();
+                i.DoIroning("Cotton");
+                i.UseSteam();
+                i.DoIroning("Cotton");
             }
         }
     }

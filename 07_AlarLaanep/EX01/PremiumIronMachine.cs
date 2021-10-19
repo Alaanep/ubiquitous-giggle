@@ -5,7 +5,7 @@ namespace EX01
     {
 
         private bool _indicatorLight;
-        
+        private int _steamUsage;
 
         public bool IndicatorLight
         {
@@ -20,30 +20,43 @@ namespace EX01
 
         public override void DoIroning(int temperature)
         {
-            if(_usageCounter == 3)
-            {
-                DeScale();
-            }
-            base.DoIroning(temperature);   
+            CheckUsage();
+            base.DoIroning(temperature);
+            CheckSteamUsage();
         }
 
         public override void DoIroning(string program)
+        {
+            CheckUsage();
+            base.DoIroning(program);
+            CheckSteamUsage();
+        }
+
+        private void CheckUsage()
         {
             if (_usageCounter == 3)
             {
                 DeScale();
             }
-            base.DoIroning(program);
+        }
+
+        private void CheckSteamUsage()
+        {
+            if (_steamUsage == 2)
+            {
+                IndicatorLight = true;
+                Console.WriteLine("Steam indicator light on. Please add water");
+            }
         }
 
         public override void UseSteam()
         {
-            base.UseSteam();
-            if (_steamUsage == 2)
+            if (!_useSteam && _temperature>=120)
             {
-                IndicatorLight = true;
-                Console.WriteLine("Steam has been used 2 times. Please add water");
+                _steamUsage++;
             }
+            base.UseSteam();
+
         }
     }
 }
