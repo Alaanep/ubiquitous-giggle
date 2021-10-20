@@ -10,7 +10,7 @@ namespace EX01
         public bool IndicatorLight
         {
             get { return _indicatorLight; }
-            set { _indicatorLight = value; }
+            private set { _indicatorLight = value; }
         }
         public PremiumIronMachine()
         {
