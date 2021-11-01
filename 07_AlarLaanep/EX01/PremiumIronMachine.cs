@@ -4,9 +4,10 @@ namespace EX01
     public class PremiumIronMachine: RegularIronMachine
     {
 
-        private bool _indicatorLight;
+        
         private int _steamUsage;
 
+        private bool _indicatorLight;
         public bool IndicatorLight
         {
             get { return _indicatorLight; }
