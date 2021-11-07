@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/alarlaanep/Projects/Hw_10/VatCalculatorTest/VatCalculatorTest.csproj": {}
+    "/Users/alarlaanep/Projects/Hw10_AlarLaanep/VatCalculatorTest/VatCalculatorTest.csproj": {}
   },
   "projects": {
-    "/Users/alarlaanep/Projects/Hw_10/EX2/EX2.csproj": {
+    "/Users/alarlaanep/Projects/Hw10_AlarLaanep/EX2/EX2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/alarlaanep/Projects/Hw_10/EX2/EX2.csproj",
+        "projectUniqueName": "/Users/alarlaanep/Projects/Hw10_AlarLaanep/EX2/EX2.csproj",
         "projectName": "EX2",
-        "projectPath": "/Users/alarlaanep/Projects/Hw_10/EX2/EX2.csproj",
+        "projectPath": "/Users/alarlaanep/Projects/Hw10_AlarLaanep/EX2/EX2.csproj",
         "packagesPath": "/Users/alarlaanep/.nuget/packages/",
-        "outputPath": "/Users/alarlaanep/Projects/Hw_10/EX2/obj/",
+        "outputPath": "/Users/alarlaanep/Projects/Hw10_AlarLaanep/EX2/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/alarlaanep/.config/NuGet/NuGet.Config"
@@ -56,14 +56,14 @@
         }
       }
     },
-    "/Users/alarlaanep/Projects/Hw_10/VatCalculatorTest/VatCalculatorTest.csproj": {
+    "/Users/alarlaanep/Projects/Hw10_AlarLaanep/VatCalculatorTest/VatCalculatorTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/alarlaanep/Projects/Hw_10/VatCalculatorTest/VatCalculatorTest.csproj",
+        "projectUniqueName": "/Users/alarlaanep/Projects/Hw10_AlarLaanep/VatCalculatorTest/VatCalculatorTest.csproj",
         "projectName": "VatCalculatorTest",
-        "projectPath": "/Users/alarlaanep/Projects/Hw_10/VatCalculatorTest/VatCalculatorTest.csproj",
+        "projectPath": "/Users/alarlaanep/Projects/Hw10_AlarLaanep/VatCalculatorTest/VatCalculatorTest.csproj",
         "packagesPath": "/Users/alarlaanep/.nuget/packages/",
-        "outputPath": "/Users/alarlaanep/Projects/Hw_10/VatCalculatorTest/obj/",
+        "outputPath": "/Users/alarlaanep/Projects/Hw10_AlarLaanep/VatCalculatorTest/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/alarlaanep/.config/NuGet/NuGet.Config"
@@ -78,8 +78,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "/Users/alarlaanep/Projects/Hw_10/EX2/EX2.csproj": {
-                "projectPath": "/Users/alarlaanep/Projects/Hw_10/EX2/EX2.csproj"
+              "/Users/alarlaanep/Projects/Hw10_AlarLaanep/EX2/EX2.csproj": {
+                "projectPath": "/Users/alarlaanep/Projects/Hw10_AlarLaanep/EX2/EX2.csproj"
               }
             }
           }

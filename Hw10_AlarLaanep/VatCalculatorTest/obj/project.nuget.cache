@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WGwTkiSEEeM6Rm1ElQOK1qItQit0qT3jUlhWpQ9OTGTHIkYjVxLNmA2isnUkHM3aguIKt144MS+XuGlZLX9ssA==",
+  "dgSpecHash": "aIarYT/M1cbyo0JpG4lo1rXZYE0DrJskA2porjxZm2z9b45+5Qnl3vJfWgZVuESo12OhDiyB9vOWxaOggYSubQ==",
   "success": true,
-  "projectFilePath": "/Users/alarlaanep/Projects/Hw_10/VatCalculatorTest/VatCalculatorTest.csproj",
+  "projectFilePath": "/Users/alarlaanep/Projects/Hw10_AlarLaanep/VatCalculatorTest/VatCalculatorTest.csproj",
   "expectedPackageFiles": [
     "/Users/alarlaanep/.nuget/packages/coverlet.collector/1.2.0/coverlet.collector.1.2.0.nupkg.sha512",
     "/Users/alarlaanep/.nuget/packages/microsoft.codecoverage/16.5.0/microsoft.codecoverage.16.5.0.nupkg.sha512",

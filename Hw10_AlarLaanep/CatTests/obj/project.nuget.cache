@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EyR/cShekd4bMEppYW2ij26i2LNMs1tFme2iot9kc++p41EX29F/DZJxtykjppL/4dgjiKFuQg/y3MchAYmFIQ==",
+  "dgSpecHash": "fhiL3nper37XUlIXwSxtiiCLN9qfCE6QDHfJKS6KiosNHoZkPREsZ+y3gX27tXzsr6RuR1I8I5wQi7yc0hiLpQ==",
   "success": true,
-  "projectFilePath": "/Users/alarlaanep/Projects/Hw_10/CatTests/CatTests.csproj",
+  "projectFilePath": "/Users/alarlaanep/Projects/Hw10_AlarLaanep/CatTests/CatTests.csproj",
   "expectedPackageFiles": [
     "/Users/alarlaanep/.nuget/packages/microsoft.codecoverage/15.9.0/microsoft.codecoverage.15.9.0.nupkg.sha512",
     "/Users/alarlaanep/.nuget/packages/microsoft.csharp/4.0.1/microsoft.csharp.4.0.1.nupkg.sha512",

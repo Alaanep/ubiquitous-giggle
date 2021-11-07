@@ -6846,11 +6846,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/alarlaanep/Projects/Hw_10/CatTests/CatTests.csproj",
+      "projectUniqueName": "/Users/alarlaanep/Projects/Hw10_AlarLaanep/CatTests/CatTests.csproj",
       "projectName": "CatTests",
-      "projectPath": "/Users/alarlaanep/Projects/Hw_10/CatTests/CatTests.csproj",
+      "projectPath": "/Users/alarlaanep/Projects/Hw10_AlarLaanep/CatTests/CatTests.csproj",
       "packagesPath": "/Users/alarlaanep/.nuget/packages/",
-      "outputPath": "/Users/alarlaanep/Projects/Hw_10/CatTests/obj/",
+      "outputPath": "/Users/alarlaanep/Projects/Hw10_AlarLaanep/CatTests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/alarlaanep/.config/NuGet/NuGet.Config"
@@ -6865,8 +6865,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "/Users/alarlaanep/Projects/Hw_10/Hw_10/Hw_10.csproj": {
-              "projectPath": "/Users/alarlaanep/Projects/Hw_10/Hw_10/Hw_10.csproj"
+            "/Users/alarlaanep/Projects/Hw10_AlarLaanep/Hw_10/Hw_10.csproj": {
+              "projectPath": "/Users/alarlaanep/Projects/Hw10_AlarLaanep/Hw_10/Hw_10.csproj"
             }
           }
         }

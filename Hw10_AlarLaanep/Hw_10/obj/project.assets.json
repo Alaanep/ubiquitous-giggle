@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/alarlaanep/Projects/Hw_10/Hw_10/Hw_10.csproj",
+      "projectUniqueName": "/Users/alarlaanep/Projects/Hw10_AlarLaanep/Hw_10/Hw_10.csproj",
       "projectName": "Hw_10",
-      "projectPath": "/Users/alarlaanep/Projects/Hw_10/Hw_10/Hw_10.csproj",
+      "projectPath": "/Users/alarlaanep/Projects/Hw10_AlarLaanep/Hw_10/Hw_10.csproj",
       "packagesPath": "/Users/alarlaanep/.nuget/packages/",
-      "outputPath": "/Users/alarlaanep/Projects/Hw_10/Hw_10/obj/",
+      "outputPath": "/Users/alarlaanep/Projects/Hw10_AlarLaanep/Hw_10/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/alarlaanep/.config/NuGet/NuGet.Config"

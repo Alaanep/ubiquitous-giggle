@@ -3,7 +3,6 @@
     <Files>
       <File FileName="EX2/Program.cs" Line="9" Column="47" />
       <File FileName="EX2/VatCalculator.cs" Line="8" Column="1" />
-      <File FileName="VatCalculatorTest/UnitTest1.cs" Line="81" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -19,15 +18,7 @@
       </Pad>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
         <State name="__root__">
-          <Node name="Hw_10" expanded="True">
-            <Node name="VatCalculatorTest" expanded="True">
-              <Node name="VatCalculatorTest" expanded="True">
-                <Node name="VatCalculatorTests" expanded="True">
-                  <Node name="TestFindPrice_false_1353_162" selected="True" />
-                </Node>
-              </Node>
-            </Node>
-          </Node>
+          <Node name="Hw_10" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
