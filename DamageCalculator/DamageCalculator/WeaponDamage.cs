@@ -3,18 +3,13 @@ namespace DamageCalculator
 {
     public class WeaponDamage
     {
-        public WeaponDamage(int startingRoll)
-        {
-            _roll = startingRoll;
-            CalculateDamage();
-        }
 
-        public const int BASE_DAMAGE = 3;
-        public const int FLAME_DAMAGE = 2;
+        public int Damage { get; protected set; }
+
+        
+
+
         private int _roll;
-        private bool _flamingDamage;
-        private bool _magic;
-
         public int Roll
         {
             get { return _roll; }
@@ -24,16 +19,7 @@ namespace DamageCalculator
                 CalculateDamage();
             }
         }
-
-        public bool Flaming
-        {
-            get { return _flamingDamage; }
-            set
-            {
-                _flamingDamage = value;
-                CalculateDamage();
-            }
-        }
+        private bool _magic;
 
         public bool Magic
         {
@@ -45,15 +31,24 @@ namespace DamageCalculator
             }
         }
 
-        public int Damage { get; private set; }
+        private bool _flaming;
 
-        private void CalculateDamage()
+        public bool Flaming
         {
-            decimal magicMultiplier = 1M;
-            if (Magic) magicMultiplier = 1.75M;
-            Damage = BASE_DAMAGE;
-            Damage = (int)(Roll * magicMultiplier) + BASE_DAMAGE;
-            if (Flaming) Damage += FLAME_DAMAGE;
+            get { return _flaming; }
+            set
+            {
+                _flaming = value;
+                CalculateDamage();
+            }
         }
+
+        protected virtual void CalculateDamage(){}
+
+        public WeaponDamage(int startingRoll)
+        {
+            _roll = startingRoll;
+            CalculateDamage();
+        }      
     }
 }
