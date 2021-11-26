@@ -1,7 +1,7 @@
 ﻿using System;
 namespace BeehiveManagementSystem
 {
-    public class Bee
+    public abstract class Bee
     {
         public string Job{ get; private set; }
         public Bee(string job)
@@ -9,7 +9,7 @@ namespace BeehiveManagementSystem
             Job = job;
         }
 
-        public virtual float CostPerShift { get; }
+        public abstract float CostPerShift { get; }
 
         public virtual void WorkTheNextShift()
         {
@@ -19,6 +19,6 @@ namespace BeehiveManagementSystem
             }
         }
 
-        protected virtual void DoJob() { }
+        protected abstract void DoJob();
     }
 }

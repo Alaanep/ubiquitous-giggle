@@ -1,14 +1,9 @@
 ﻿using System;
 namespace DamageCalculator
 {
-    public class WeaponDamage
+    public abstract class WeaponDamage
     {
-
         public int Damage { get; protected set; }
-
-        
-
-
         private int _roll;
         public int Roll
         {
@@ -20,7 +15,6 @@ namespace DamageCalculator
             }
         }
         private bool _magic;
-
         public bool Magic
         {
             get { return _magic; }
@@ -43,7 +37,7 @@ namespace DamageCalculator
             }
         }
 
-        protected virtual void CalculateDamage(){}
+        protected abstract void CalculateDamage();
 
         public WeaponDamage(int startingRoll)
         {
