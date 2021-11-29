@@ -26,15 +26,24 @@ namespace EX1
             
         }
 
-        DateTime nextChristmas = new DateTime(2021, 12, 24, 19, 00, 00, 00, DateTimeKind.Utc);
+        DateTime nextChristmas = new DateTime(2021, 12, 24, 20, 00, 00, 00, DateTimeKind.Utc);
+
         
 
 
 
         private void timer1_Tick(object sender, EventArgs e)
-        {
+        {   
             TimeSpan timeDifference = nextChristmas - System.DateTime.UtcNow;
+           
+            
             label1.Text =$"Until Christmas: \n{timeDifference.Days} DAYS: {timeDifference.Hours} HOURS: {timeDifference.Minutes}MINUTES: {timeDifference.Seconds}.{timeDifference.Milliseconds}SECONDS:"; timeDifference.ToString();
+            if (timeDifference.Seconds <= 0)
+            {
+                label1.Text = "00:00:00";
+                timer1.Stop();
+
+            }
         }
 
 
