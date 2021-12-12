@@ -37,7 +37,6 @@ namespace EX2
                     {
                         try
                         {
-
                             dic.Add(months[i], double.Parse(line));
                             i++;
                         }
