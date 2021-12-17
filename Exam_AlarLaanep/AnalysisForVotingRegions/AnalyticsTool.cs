@@ -9,7 +9,6 @@ namespace AnalysisForVotingRegions
     {
         public Dictionary<string, Dictionary<string, int>> _generalData2021 = new Dictionary<string, Dictionary<string, int>>();
         public Dictionary<string, Dictionary<string, int>> _statistics = new Dictionary<string, Dictionary<string, int>>();
-        
 
         public AnalyticsTool()
         {
@@ -17,7 +16,6 @@ namespace AnalysisForVotingRegions
             _statistics = ReadFromFile("statistika.txt", ";");
         }
 
-        //todo write unit tests
         public string FindMinimalNumberCouncilMembersForEachRuralMunicipality()
         {
             string result = string.Empty;
@@ -28,7 +26,6 @@ namespace AnalysisForVotingRegions
             return result;
         }
 
-        //todo write unit tests
         public int GetMinimalNumberCouncilMembers(int population)
         {
             if (population > 300000)
@@ -69,144 +66,178 @@ namespace AnalysisForVotingRegions
             }
         }
 
-        //todo refactor a lot of code dublication
-        //todo write unit tests
-        public string FindMunicipalityWithLowestAndHigestEVotePercentage()
+        public double FindHighestPercentage(string key, string paperVotes, string eVotes, bool reverse = true)
         {
-            string result = string.Empty;
+            double highestPercentage = 0;
+            
+            foreach (KeyValuePair<string, Dictionary<string, int>> municipality in _generalData2021)
+            {
+                int totalVotes = municipality.Value[paperVotes] + municipality.Value[eVotes];
+                double percetangeOf = 0;
+                if (reverse)
+                {
+                    percetangeOf = ((double)municipality.Value[key] / (double)totalVotes) * 100;
+                }
+                else
+                {
+                    percetangeOf = ((double)totalVotes/ (double)municipality.Value[key]) * 100;
+                }
+                
+                if (percetangeOf > highestPercentage)
+                {
+                    highestPercentage = percetangeOf;
+                }
+            }
+            return highestPercentage;
+        }
 
-            double mostEVotes = 0;
-            string municipalityWithMostEVotes = string.Empty;
-
-            double leastEVotes = 100;
-            string municipalityWithLeastEVotes = string.Empty;
+        public string FindMunicipalityWithHighestPercentage(string key, string paperVotes, string eVotes, bool reverse=true)
+        {
+            double highestPercentage = 0;
+            string municipalityWithHighestPercentage = string.Empty;
 
             foreach (KeyValuePair<string, Dictionary<string, int>> municipality in _generalData2021)
             {
-                //Console.Write($"{municipality.Key} Paberil: {municipality.Value["Paberil häälte arv"]} E-Haaled: {municipality.Value["E-häälte arv"]}");
-                int totalVotes = municipality.Value["Paberil häälte arv"] + municipality.Value["E-häälte arv"];
-                double perctangeOfEVotes = ((double)municipality.Value["E-häälte arv"] / (double)totalVotes) * 100;
-                //Console.WriteLine($" Perctantage of E-votes: {string.Format("{0:0.0}", perctangeOfEVotes)}%");
-                if (perctangeOfEVotes > mostEVotes)
+                
+                int totalVotes = municipality.Value[paperVotes] + municipality.Value[eVotes];
+                double percetangeOf = 0;
+                if (reverse)
                 {
-                    mostEVotes = perctangeOfEVotes;
-                    municipalityWithMostEVotes = municipality.Key;
+                    percetangeOf = ((double)municipality.Value[key] / (double)totalVotes) * 100;
                 }
-
-                if (perctangeOfEVotes < leastEVotes)
+                else
                 {
-                    leastEVotes = perctangeOfEVotes;
-                    municipalityWithLeastEVotes = municipality.Key;
+                    percetangeOf = ((double)totalVotes / (double)municipality.Value[key]) * 100;
+                }
+               
+                if (percetangeOf > highestPercentage)
+                {
+                    highestPercentage = percetangeOf;
+                    municipalityWithHighestPercentage = municipality.Key;
                 }
             }
-            result += $"E-voting percantage was highest in {municipalityWithMostEVotes}. E-Votes perctange was {string.Format("{0:0.0}", mostEVotes)}%\n";
+            return municipalityWithHighestPercentage;
+        }
+
+        public double FindLowestPercentage(string key, string paperVotes, string eVotes, bool reverse=true)
+        {
+            double lowestPercentage = 100;
+
+            foreach (KeyValuePair<string, Dictionary<string, int>> municipality in _generalData2021)
+            {
+                int totalVotes = municipality.Value[paperVotes] + municipality.Value[eVotes];
+                double percetangeOf = 0;
+                if (reverse)
+                {
+                    percetangeOf = ((double)municipality.Value[key] / (double)totalVotes) * 100;
+                }
+                else
+                {
+                    percetangeOf = ((double)totalVotes / (double)municipality.Value[key]) * 100;
+                }
+                if (percetangeOf < lowestPercentage)
+                {
+                    lowestPercentage = percetangeOf;
+                }
+            }
+            return lowestPercentage;
+        }
+
+        public string FindMunicipalityWithLowestPercentage(string key, string paperVotes, string eVotes, bool reverse=true)
+        {
+            double lowestPercentage = 100;
+            string municipalityWithLowestPercentage = string.Empty;
+
+            foreach (KeyValuePair<string, Dictionary<string, int>> municipality in _generalData2021)
+            {
+                int totalVotes = municipality.Value[paperVotes] + municipality.Value[eVotes];
+                double percetangeOf = 0;
+                if (reverse)
+                {
+                    percetangeOf = ((double)municipality.Value[key] / (double)totalVotes) * 100;
+                }
+                else
+                {
+                    percetangeOf = ((double)totalVotes / (double)municipality.Value[key]) * 100;
+                }
+                if (percetangeOf < lowestPercentage)
+                {
+                    lowestPercentage = percetangeOf;
+                    municipalityWithLowestPercentage = municipality.Key;
+                }
+            }
+            return municipalityWithLowestPercentage;
+        }
+
+        public string FindMunicipalityWithLowestAndHigestEVotePercentage()
+        {
+            double mostEVotes = FindHighestPercentage("E-häälte arv", "Paberil häälte arv", "E-häälte arv");
+            string municipalityWithMostEVotes = FindMunicipalityWithHighestPercentage("E-häälte arv", "Paberil häälte arv", "E-häälte arv");
+
+            double leastEVotes = FindLowestPercentage("E-häälte arv", "Paberil häälte arv", "E-häälte arv");
+            string municipalityWithLeastEVotes = FindMunicipalityWithLowestPercentage("E-häälte arv", "Paberil häälte arv", "E-häälte arv");
+
+            string result = $"E-voting percantage was highest in {municipalityWithMostEVotes}. E-Votes perctange was {string.Format("{0:0.0}", mostEVotes)}%\n";
             result += $"E-voting percantage was lowest in {municipalityWithLeastEVotes}. E-Votes perctange was {string.Format("{0:0.0}", leastEVotes)}%\n";
-            //Console.WriteLine(result);
             return result;
         }
 
-        //todo refactor a lot of code dublication
-        //todo write unit test
         public string FindMunicipalityWithLowestAndHigestPaperVotePercentage()
         {
-            string result = string.Empty;
+            double mostPaperVotes = FindHighestPercentage("Paberil häälte arv", "Paberil häälte arv", "E-häälte arv");
+            string municipalityWithMostPaperVotes = FindMunicipalityWithHighestPercentage("Paberil häälte arv", "Paberil häälte arv", "E-häälte arv");
 
-            double mostPaperVotes = 0;
-            string municipalityWithMostPaperVotes = string.Empty;
+            double leastPaperVotes = FindLowestPercentage("Paberil häälte arv", "Paberil häälte arv", "E-häälte arv");
+            string municipalityWithLeastPaperVotes = FindMunicipalityWithLowestPercentage("Paberil häälte arv", "Paberil häälte arv", "E-häälte arv");
 
-            double leastPaperVotes = 100;
-            string municipalityWithLeastPaperVotes = string.Empty;
-
-            foreach (KeyValuePair<string, Dictionary<string, int>> municipality in _generalData2021)
-            {
-                //Console.Write($"{municipality.Key} Paberil: {municipality.Value["Paberil häälte arv"]} E-Haaled: {municipality.Value["E-häälte arv"]}");
-                int totalVotes = municipality.Value["Paberil häälte arv"] + municipality.Value["E-häälte arv"];
-                double perctangeOfPaperVotes = ((double)municipality.Value["Paberil häälte arv"] / (double)totalVotes) * 100;
-                //Console.WriteLine($" Perctantage of E-votes: {string.Format("{0:0.0}", perctangeOfEVotes)}%");
-                if (perctangeOfPaperVotes > mostPaperVotes)
-                {
-                    mostPaperVotes = perctangeOfPaperVotes;
-                    municipalityWithMostPaperVotes = municipality.Key;
-                }
-
-                if (perctangeOfPaperVotes < leastPaperVotes)
-                {
-                    leastPaperVotes = perctangeOfPaperVotes;
-                    municipalityWithLeastPaperVotes = municipality.Key;
-                }
-            }
-            result += $"Paper voting percantage was highest in {municipalityWithMostPaperVotes}. E-Votes perctange was {string.Format("{0:0.0}", mostPaperVotes)}%\n";
-            result += $"Paper voting percantage was lowest in {municipalityWithLeastPaperVotes}. E-Votes perctange was {string.Format("{0:0.0}", leastPaperVotes)}%\n";
-            //Console.WriteLine(result);
+            string result = $"Paper voting percantage was highest in {municipalityWithMostPaperVotes}. Paper Votes perctange was {string.Format("{0:0.0}", mostPaperVotes)}%\n";
+            result += $"Paper voting percantage was lowest in {municipalityWithLeastPaperVotes}. Paper Votes perctange was {string.Format("{0:0.0}", leastPaperVotes)}%\n";
             return result;
             
         }
 
-        //todo refactor because code dublication
-        //write unit tests
         public string FindRegionWithHighestAndLowestVotingActivity()
         {
             string result = string.Empty;
 
-            double highestVotingActivity = 0;
-            string municipalityWithHighestVotingActivity = string.Empty;
+            double highestVotingActivity = FindHighestPercentage("Hääleõiguslikke kodanikke", "Paberil häälte arv", "E-häälte arv", false) ;
+            string municipalityWithHighestVotingActivity = FindMunicipalityWithHighestPercentage("Hääleõiguslikke kodanikke", "Paberil häälte arv", "E-häälte arv", false);
 
-            double lowestVotingActivity = 100;
-            string municipalityWithlowestVotingActivity = string.Empty;
-
-            foreach (KeyValuePair<string, Dictionary<string, int>> municipality in _generalData2021)
-            {
-                int totalVotes = municipality.Value["Paberil häälte arv"] + municipality.Value["E-häälte arv"];
-                double votingActivity = ((double)totalVotes/ (double)municipality.Value["Hääleõiguslikke kodanikke"]) * 100;
-                //Console.Write($"{municipality.Key}: Hääleõiguslikke kodanikke: {municipality.Value["Hääleõiguslikke kodanikke"] } häälte arv: {totalVotes}");
-                //Console.WriteLine($" Voting Activity: {string.Format("{0:0.0}", votingActivity)}%");
-
-                if (votingActivity > highestVotingActivity)
-                {
-                    highestVotingActivity = votingActivity;
-                    municipalityWithHighestVotingActivity = municipality.Key;
-                }
-
-                if (votingActivity < lowestVotingActivity)
-                {
-                    lowestVotingActivity = votingActivity;
-                    municipalityWithlowestVotingActivity = municipality.Key;
-                }
-            }
+            double lowestVotingActivity = FindLowestPercentage("Hääleõiguslikke kodanikke", "Paberil häälte arv", "E-häälte arv", false);
+            string municipalityWithlowestVotingActivity = FindMunicipalityWithLowestPercentage("Hääleõiguslikke kodanikke", "Paberil häälte arv", "E-häälte arv", false);
             result += $"Highest voting activity was in {municipalityWithHighestVotingActivity}. Voting perctange was {string.Format("{0:0.0}", highestVotingActivity)}%\n";
             result += $"Lowest voting activity  was in {municipalityWithlowestVotingActivity}. Voting perctange was {string.Format("{0:0.0}", lowestVotingActivity)}%\n";
-            //Console.WriteLine(result);
             return result;
         }
 
-        public void PrintVotingActitityAndPercentageOfVotes(string region)
+        public string GetVotingActitityAndPercentageOfVotes(string region)
         {
-            if (_generalData2021.ContainsKey(region))
+            foreach (KeyValuePair<string, Dictionary<string, int>> municipality in _generalData2021)
             {
-                //percentage of e-votes
-                int totalVotes = _generalData2021[region]["Paberil häälte arv"] + _generalData2021[region]["E-häälte arv"];
-                double perctangeOfEVotes = ((double)_generalData2021[region]["E-häälte arv"] / (double)totalVotes) * 100;
+                StringComparison comp = StringComparison.OrdinalIgnoreCase;
+                if(municipality.Key.Contains(region, comp)){
+                    region = municipality.Key;
+                    
+                    int totalVotes = _generalData2021[region]["Paberil häälte arv"] + _generalData2021[region]["E-häälte arv"];
+                    double perctangeOfEVotes = ((double)_generalData2021[region]["E-häälte arv"] / (double)totalVotes) * 100;
 
-                //perctange of paper votes
-                double perctangeOfPaperVotes = ((double)_generalData2021[region]["Paberil häälte arv"] / (double)totalVotes) * 100;
+                    double perctangeOfPaperVotes = ((double)_generalData2021[region]["Paberil häälte arv"] / (double)totalVotes) * 100;
 
-                //voting activity
-                double votingActivity = ((double)totalVotes / (double)_generalData2021[region]["Hääleõiguslikke kodanikke"]) * 100;
+                    double votingActivity = ((double)totalVotes / (double)_generalData2021[region]["Hääleõiguslikke kodanikke"]) * 100;
 
-                Console.WriteLine($"{region}-> Valimisaktiivsus on {string.Format("{0:0.0}", votingActivity)}%, e-häälte osakaal on {string.Format("{0:0.0}", perctangeOfEVotes)}% ning paberhäälte osakaal {string.Format("{0:0.0}", perctangeOfPaperVotes)}%  ");
+                    return $"{region}-> Valimisaktiivsus on {string.Format("{0:0.0}", votingActivity)}%, e-häälte osakaal on {string.Format("{0:0.0}", perctangeOfEVotes)}% ning paberhäälte osakaal {string.Format("{0:0.0}", perctangeOfPaperVotes)}%";
+                }
             }
-            else
-            {
-                Console.WriteLine($"Could not found info based on {region}");
-            }
+            return $"Could not found info based on {region}";   
         }
 
-        public void PrintInfoForAllRegions()
+        //todo how to unit test?
+        public string PrintInfoForAllRegions()
         {
-            //total voting activity
             int totalVotesForAllRegions = 0;
             int totalVotersForAllRegions = 0;
             double totalVotingActivity = 0;
+            string result = string.Empty;
 
             Dictionary<string, double> regionsVotingActivity = new Dictionary<string, double>();
 
@@ -221,20 +252,19 @@ namespace AnalysisForVotingRegions
                 totalVotesForAllRegions += totalVotes;
                 totalVotersForAllRegions += municipality.Value["Hääleõiguslikke kodanikke"];
                 
-                //Console.Write($"{municipality.Key}: Hääleõiguslikke kodanikke: {municipality.Value["Hääleõiguslikke kodanikke"] } häälte arv: {totalVotes}");
-                //Console.WriteLine($" Voting Activity: {string.Format("{0:0.0}", votingActivity)}%");
             }
             totalVotingActivity = ((double)totalVotesForAllRegions / (double)totalVotersForAllRegions) * 100;
-            Console.WriteLine($"Total voting activity for all regions: {string.Format("{0:0.0}", totalVotingActivity)}%");
-            Console.WriteLine();
+            result+=$"Total voting activity for all regions: {string.Format("{0:0.0}", totalVotingActivity)}%\n\n";
+            
 
             foreach (KeyValuePair<string, double> item in regionsVotingActivity.OrderByDescending(key => key.Value))
             {
-                Console.WriteLine($"{item.Key} {string.Format("{0:0.0}", item.Value)}%");
+                result+=$"{item.Key} {string.Format("{0:0.0}", item.Value)}%\n";
             }
-            Console.WriteLine();
+            result += "\n";
 
-            Console.WriteLine($"Total voters for all regions: {totalVotesForAllRegions}");
+            result+=$"Total voters for all regions: {totalVotesForAllRegions}\n";
+            return result;
         }
 
         public string FindRegionWithHighestAndLowestPercentageOfCitizensWithTheRightToVote()
@@ -250,8 +280,6 @@ namespace AnalysisForVotingRegions
             foreach (KeyValuePair<string, Dictionary<string, int>> municipality in _generalData2021)
             {
                 double percentageOfCitizensWithTheRightToVote = ((double)municipality.Value["Hääleõiguslikke kodanikke"] / (double)municipality.Value["Regiooni rahvaarv"]) * 100;
-                //Console.Write($"{municipality.Key}: Hääleõiguslikke kodanikke: {municipality.Value["Hääleõiguslikke kodanikke"] } häälte arv: {totalVotes}");
-                //Console.WriteLine($" Voting Activity: {string.Format("{0:0.0}", votingActivity)}%");
 
                 if (percentageOfCitizensWithTheRightToVote> highestPercentage)
                 {
@@ -265,11 +293,9 @@ namespace AnalysisForVotingRegions
                     municipalityWithlowestPercentage = municipality.Key;
                 }
             }
-            result += $"Highest perctange of citizens with right to vote was in {municipalityWithHighestPercentage}. with {string.Format("{0:0.0}", highestPercentage)}% of citizen right to vote\n";
-            result += $"Lowest perctange of citizens with right to vote was in {municipalityWithlowestPercentage}. with {string.Format("{0:0.0}", lowestPercentage)}% of citizen right to vote\n";
-            //Console.WriteLine(result);
+            result += $"Highest perctange of citizens with right to vote was in {municipalityWithHighestPercentage} with {string.Format("{0:0.0}", highestPercentage)}% of citizen right to vote\n";
+            result += $"Lowest perctange of citizens with right to vote was in {municipalityWithlowestPercentage} with {string.Format("{0:0.0}", lowestPercentage)}% of citizen right to vote\n";
             return result;
-
         }
 
         public string FindIfElectionsAreHeld(int year)
@@ -303,7 +329,7 @@ namespace AnalysisForVotingRegions
                                 result += $"No previous elections. Elections were held first time in {kovElectionYears[i]}.";
                                 return result;
                             }
-                            result += $"Next elections {kovElectionYears[i]} ";
+                            result += $"Next elections {kovElectionYears[i]}";
                             return result;
                         }
                     }
@@ -349,7 +375,7 @@ namespace AnalysisForVotingRegions
             return result;
         }
 
-        public void CreateAccountNameAndSave(string inputName)
+        public string CreateAccountNameAndSave(string inputName)
         {   
             string name = inputName.ToLower();
 
@@ -368,8 +394,9 @@ namespace AnalysisForVotingRegions
 
             if (names.Length == 1)
             {
-                Console.WriteLine("Please enter firstname and lastname");
-            } else if (names.Length == 2)
+                return "For account name please enter firstname and lastname";
+            }
+            else if (names.Length == 2)
             {
                 for (int i = 0; i < names.Length; i++) {
 
@@ -417,12 +444,52 @@ namespace AnalysisForVotingRegions
                     }
                 }
             }
-            Console.WriteLine(accountname);
-            
+            string fileName = "accountNames.txt";
+            using (StreamWriter writer = new StreamWriter(fileName, true))
+            {
+                try
+                {
+                    writer.WriteLine(accountname);
+                    Console.WriteLine( $"Account name: {accountname} was added to {fileName}");
+                } catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return accountname;
         }
 
-        //todo refactor ReadFromFile method?
-        //todo write unit Tests for ReadFromFile
+        public string FindBiggestWinnersAndLosers()
+        {
+            string result = string.Empty;
+            string biggestWinner = string.Empty;
+            double biggestWin = 0;
+            string biggestLoser = string.Empty;
+            double biggestLost = 100;
+
+
+            foreach (KeyValuePair<string, Dictionary<string, int>> erakond in _statistics)
+            {
+
+                double electionResult = erakond.Value["Tegelik tulemus"] - erakond.Value["Ennustatav tulemus"];
+
+                if (electionResult > biggestWin)
+                {
+                    biggestWin = electionResult;
+                    biggestWinner = erakond.Key;
+                }
+
+                if (electionResult < biggestLost)
+                {
+                    biggestLost = electionResult;
+                    biggestLoser = erakond.Key;
+                }
+            }
+            result += $"Biggest winner was {biggestWinner} with {biggestWin} more places than expected.\n";
+            result += $"Biggest loser was {biggestLoser} with {biggestLost*-1} places less than expected.\n";
+            return result;
+        }
+
         public Dictionary<string, Dictionary<string, int>> ReadFromFile(string fileName, string splitter)
         {
             Dictionary<string, Dictionary<string, int>> dataFromFile = new Dictionary<string, Dictionary<string, int>>();

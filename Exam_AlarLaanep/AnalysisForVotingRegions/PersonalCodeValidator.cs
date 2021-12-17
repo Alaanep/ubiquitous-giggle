@@ -60,7 +60,7 @@ namespace AnalysisForVotingRegions
             if (CheckAllDigits(idCode))
             {
                 //check if idCode is 11 digits long
-                if (checkLength(idCode))
+                if (CheckLength(idCode))
                 {
                     //check if IdCode first char is beteen 1-6
                     if (CheckFirstCharRange(idCode))
@@ -68,12 +68,11 @@ namespace AnalysisForVotingRegions
                         //validate birthdate numbers from 1-7
                         if (CheckBirthdate(idCode))
                         {
-                            return true;
                             //validate check nr
-                            //if (CheckCheckNr(idCode))
-                            //{
-                            //    return true;
-                            //}
+                            if (CheckCheckNr(idCode))
+                            {
+                                return true;
+                            }
                         }
                     }
                 }
@@ -152,7 +151,7 @@ namespace AnalysisForVotingRegions
         }
 
         //check idCode length
-        public static bool checkLength(string idCode)
+        public static bool CheckLength(string idCode)
         {
             if (idCode.Length != 11)
             {

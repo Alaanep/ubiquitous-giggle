@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
 namespace AnalysisForVotingRegions
 {
     class Program
@@ -8,36 +11,22 @@ namespace AnalysisForVotingRegions
         {
             AnalyticsTool analyticsTool = new AnalyticsTool();
             //Console.WriteLine(analyticsTool.FindMinimalNumberCouncilMembersForEachRuralMunicipality());
-            //Console.WriteLine( analyticsTool.FindMunicipalityWithLowestAndHigestEVotePercentage());
-            //Console.WriteLine( analyticsTool.FindMunicipalityWithLowestAndHigestPaperVotePercentage());
-            //Console.WriteLine( analyticsTool.FindRegionWithHighestAndLowestVotingActivity());
-            //analyticsTool.PrintVotingActitityAndPercentageOfVotes("Tartu linn");
-            //analyticsTool.PrintInfoForAllRegions();
+            //Console.WriteLine(analyticsTool.FindMunicipalityWithLowestAndHigestEVotePercentage());
+            //Console.WriteLine(analyticsTool.FindMunicipalityWithLowestAndHigestPaperVotePercentage());
+            //Console.WriteLine(analyticsTool.FindRegionWithHighestAndLowestVotingActivity());
+            //Console.WriteLine(analyticsTool.GetVotingActitityAndPercentageOfVotes("hiiu"));
+            //Console.WriteLine(analyticsTool.PrintInfoForAllRegions());
+            //Console.WriteLine(analyticsTool.FindRegionWithHighestAndLowestPercentageOfCitizensWithTheRightToVote());
+            Console.WriteLine(analyticsTool.FindIfElectionsAreHeld(1922));
+            //Console.WriteLine(analyticsTool.FindIfPersonCouldVoteOrStandAsCandidate("60509113456"));
+            //Console.WriteLine(analyticsTool.CreateAccountNameAndSave("HöövelÜ Jäääääar"));
+            //Console.WriteLine(analyticsTool.FindBiggestWinnersAndLosers());
 
-            //Console.WriteLine( analyticsTool.FindRegionWithHighestAndLowestPercentageOfCitizensWithTheRightToVote());
-            //Console.WriteLine(analyticsTool.FindIfElectionsAreHeld(2050));
-
-            //Console.WriteLine(analyticsTool.FindIfPersonCouldVoteOrStandAsCandidate("50409112269"));
-            analyticsTool.CreateAccountNameAndSave("HöövelÜ Jäääääar");
-            //foreach (KeyValuePair<string, Dictionary<string, int>> maakond in analyticsTool._generalData2021)
-            //{
-            //    Console.WriteLine($"Key: {maakond.Key}");
-            //    foreach (KeyValuePair<string, int> data in maakond.Value)
-            //    {
-            //        Console.WriteLine($"Key: {data.Key}, Value: {data.Value}");
-            //    }
-            //    Console.WriteLine();
-            //}
-
-            //foreach (KeyValuePair<string, Dictionary<string, int>> erakond in analyticsTool._statistics)
-            //{
-            //    Console.WriteLine($"Key: {erakond.Key}");
-            //    foreach (KeyValuePair<string, int> data in erakond.Value)
-            //    {
-            //        Console.WriteLine($"Key: {data.Key}, Value: {data.Value}");
-            //    }
-            //    Console.WriteLine();
-            //}
-        }
+            //DetailedAnalyticsTool detailedAnalyticsTool = new DetailedAnalyticsTool();
+            //Console.WriteLine(detailedAnalyticsTool.FindTotalNumberOfVotesForParty("reform"));
+            //Console.WriteLine(detailedAnalyticsTool.FoundPersonWithLeastAndMostVotes("Eesti reformierakond"));
+            //Console.WriteLine(detailedAnalyticsTool.FindPersonsWithZeroVotes());
+            //Console.WriteLine(detailedAnalyticsTool.FindCandidatesWithPersonalMandate());
+        }   
     }
 }
