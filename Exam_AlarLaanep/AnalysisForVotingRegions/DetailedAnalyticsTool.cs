@@ -5,12 +5,16 @@ using System.Linq;
 
 namespace AnalysisForVotingRegions
 {
-    public class DetailedAnalyticsTool
+    public class DetailedAnalyticsTool: AnalyticsTool
     {
-        public Dictionary<string, Dictionary<string, string>> _tallinnRegion2Results = new Dictionary<string, Dictionary<string, string>>();
-        public DetailedAnalyticsTool()
+        public Dictionary<string, Dictionary<string, string>> _regionResults = new Dictionary<string, Dictionary<string, string>>();
+        private string _splitter;
+        private string _filename;
+        public DetailedAnalyticsTool(string fileName, string splitter)
         {
-            _tallinnRegion2Results=ReadFile("Tallinn_region2_results.csv");
+            _filename = fileName;
+            _regionResults = ReadFile(fileName, splitter);
+            _splitter = splitter;
         }
 
         public List<string> FindTotalVotes(string partyName, KeyValuePair<string, Dictionary<string, string>> candidate)
@@ -49,7 +53,7 @@ namespace AnalysisForVotingRegions
         {
             int totalVotes = 0;
             string foundPartyName = string.Empty;
-            foreach (KeyValuePair<string, Dictionary<string, string>> candidate in _tallinnRegion2Results)
+            foreach (KeyValuePair<string, Dictionary<string, string>> candidate in _regionResults)
             {   if(FindTotalVotes(partyName, candidate) != null)
                 {
                     foundPartyName = FindTotalVotes(partyName, candidate)[0];
@@ -76,7 +80,7 @@ namespace AnalysisForVotingRegions
 
             string foundPartyName = string.Empty;
 
-            foreach (KeyValuePair<string, Dictionary<string, string>> candidate in _tallinnRegion2Results)
+            foreach (KeyValuePair<string, Dictionary<string, string>> candidate in _regionResults)
             {
                 int totalVotes = 0;
                 if (FindTotalVotes(partyName, candidate) != null)
@@ -110,7 +114,7 @@ namespace AnalysisForVotingRegions
         public string FindPersonsWithZeroVotes()
         {
             string result = string.Empty;
-            foreach (KeyValuePair<string, Dictionary<string, string>> candidate in _tallinnRegion2Results)
+            foreach (KeyValuePair<string, Dictionary<string, string>> candidate in _regionResults)
             {
                 int paperVotes = 0;
                 int eVotes = 0;
@@ -146,24 +150,78 @@ namespace AnalysisForVotingRegions
             return result;
         }
 
+        public List<string> CreateListFromAccountNames()
+        {
+            List<string> accountNames = new List<string>();
+
+            using(StreamReader reader = new StreamReader("accountNames.txt"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string line = reader.ReadLine();
+                    accountNames.Add(line);
+                }
+            }
+            return accountNames;
+        }
+
+        public override string CreateAccountNameAndSave(string inputName)
+        {
+            List<string> accountNames = CreateListFromAccountNames();
+            string accountName = CreateAccountName(inputName);
+
+            if (accountName == null)
+            {
+                return "For account name please enter firstname and lastname";
+            }
+            int count = 0;
+            while (accountNames.Contains(accountName))
+            {
+                string accountNameLastChar = accountName.Substring(accountName.Length - 1);
+                if (int.TryParse(accountNameLastChar, out count))
+                {
+                    count++;
+                    accountName = accountName.Substring(0, accountName.Length - 1) + count;
+                } else
+                {
+                    count++;
+                    accountName = accountName + count.ToString(); ;
+                }
+            }
+            SaveAccountNameToFile(accountName);
+            return accountName;
+        }
+
+        public void CreateAccountNameAndSaveForEveryCandidate()
+        {
+            foreach (KeyValuePair<string, Dictionary<string, string>> candidate in _regionResults)
+            {
+                CreateAccountNameAndSave(candidate.Key);
+            }
+        }
+
         public string FindCandidatesWithPersonalMandate()
         {
             string result = string.Empty;
-            int simpleQuota = GetSimpleQuota();
-            foreach (KeyValuePair<string, Dictionary<string, string>> candidate in _tallinnRegion2Results)
+            int simpleQuota = GetSimpleQuota(_splitter);
+            foreach (KeyValuePair<string, Dictionary<string, string>> candidate in _regionResults)
             {
                 string foundParty = FindTotalVotes("", candidate)[0];
                 int totalVotes = int.Parse(FindTotalVotes("", candidate)[1]);
                 if (totalVotes > simpleQuota)
                 {
-                    result += $"{candidate.Key} {foundParty} {totalVotes}";
+                    result += $"{candidate.Key} {foundParty} {totalVotes}\n";
                 }
+            }
+            if (result == string.Empty)
+            {
+                return "There wasn't not any candidates who got personal mandate";
             }
             return result;
 
         }
 
-        public Dictionary<string, Dictionary<string, string>> ReadFile(string fileName)
+        public Dictionary<string, Dictionary<string, string>> ReadFile(string fileName, string splitter)
         {
             Dictionary<string, Dictionary<string, string>> dataFromFile = new Dictionary<string, Dictionary<string, string>>();
             try
@@ -179,7 +237,7 @@ namespace AnalysisForVotingRegions
                     {
                         line = reader.ReadLine();
                         
-                        string[] values = line.Split(",");
+                        string[] values = line.Split(splitter);
                         try
                         {
                             partyName.Add(values[0]);
@@ -208,10 +266,10 @@ namespace AnalysisForVotingRegions
             return dataFromFile;
         }
 
-        public int GetSimpleQuota()
+        public int GetSimpleQuota(string splitter)
         {
-            string lastLine = File.ReadLines("Tallinn_region2_results.csv").Last();
-            lastLine = lastLine.Replace(",", "");
+            string lastLine = File.ReadLines(_filename).Last();
+            lastLine = lastLine.Replace(splitter, "");
 
             
             if(int.TryParse(lastLine, out int quota))

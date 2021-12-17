@@ -375,8 +375,8 @@ namespace AnalysisForVotingRegions
             return result;
         }
 
-        public string CreateAccountNameAndSave(string inputName)
-        {   
+        public string CreateAccountName(string inputName)
+        {
             string name = inputName.ToLower();
 
             string[] charsToReplace = new string[] { "ä", "ü", "õ", "ö" };
@@ -389,21 +389,23 @@ namespace AnalysisForVotingRegions
             }
 
 
-            string[] names = name.Split(" ");   
+            string[] names = name.Split(" ");
             string accountname = string.Empty;
 
             if (names.Length == 1)
             {
-                return "For account name please enter firstname and lastname";
+                return null;
             }
             else if (names.Length == 2)
             {
-                for (int i = 0; i < names.Length; i++) {
+                for (int i = 0; i < names.Length; i++)
+                {
 
                     if (names[i].Length >= 6)
                     {
                         accountname += names[i].Substring(0, 6);
-                    } else
+                    }
+                    else
                     {
                         accountname += names[i].Substring(0, names[i].Length);
                     }
@@ -412,11 +414,12 @@ namespace AnalysisForVotingRegions
                         accountname += ".";
                     }
                 }
-            } else if (names.Length >= 3)
+            }
+            else if (names.Length >= 3)
             {
                 for (int i = 0; i < names.Length; i++)
                 {
-                    if (i == 0 || i == 1 )
+                    if (i == 0 || i == 1)
                     {
                         if (names[i].Length >= 3)
                         {
@@ -431,7 +434,7 @@ namespace AnalysisForVotingRegions
                             accountname += ".";
                         }
                     }
-                    if(i== names.Length - 1)
+                    if (i == names.Length - 1)
                     {
                         if (names[i].Length >= 6)
                         {
@@ -444,19 +447,35 @@ namespace AnalysisForVotingRegions
                     }
                 }
             }
+            return accountname;
+        }
+
+        public void SaveAccountNameToFile(string accountName)
+        {
             string fileName = "accountNames.txt";
             using (StreamWriter writer = new StreamWriter(fileName, true))
             {
                 try
                 {
-                    writer.WriteLine(accountname);
-                    Console.WriteLine( $"Account name: {accountname} was added to {fileName}");
-                } catch(Exception ex)
+                    writer.WriteLine(accountName);
+                    Console.WriteLine($"Account name: {accountName} was added to {fileName}");
+                }
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
             }
-            return accountname;
+        }
+
+        public virtual string CreateAccountNameAndSave(string inputName)
+        {
+            string accountName = CreateAccountName(inputName);
+            if (accountName == null)
+            {
+                return "For account name please enter firstname and lastname";
+            }
+            SaveAccountNameToFile(accountName);
+            return accountName;
         }
 
         public string FindBiggestWinnersAndLosers()
