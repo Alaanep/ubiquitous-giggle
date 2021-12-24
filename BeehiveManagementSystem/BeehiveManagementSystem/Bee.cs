@@ -1,7 +1,7 @@
 ﻿using System;
 namespace BeehiveManagementSystem
 {
-    public abstract class Bee
+    public abstract class Bee: IWorker
     {
         public string Job{ get; private set; }
         public Bee(string job)

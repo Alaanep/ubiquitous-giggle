@@ -11,8 +11,8 @@ namespace BeehiveManagementSystem
         public string StatusReport { get; private set; }
         public override float CostPerShift { get { return 2.15f; } }
 
-        private Bee[] workers = new Bee[0];
-        private void AddWorker(Bee worker)
+        private IWorker[] workers = new IWorker[0];
+        private void AddWorker(IWorker worker)
         {
             if(unassignedWorkers >= 1f)
             {
@@ -67,7 +67,7 @@ namespace BeehiveManagementSystem
         private string WorkerStatus(string job)
         {
             int count = 0;
-            foreach(Bee worker in workers)
+            foreach(IWorker worker in workers)
             {
                 if (worker.Job == job) count++;
             }
@@ -79,7 +79,7 @@ namespace BeehiveManagementSystem
         protected override void DoJob()
         {
             eggs += EGGS_PER_SHIFT;
-            foreach(Bee worker in workers)
+            foreach(IWorker worker in workers)
             {
                 worker.WorkTheNextShift();
             }

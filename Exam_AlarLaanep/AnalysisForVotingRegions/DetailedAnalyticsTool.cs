@@ -177,16 +177,36 @@ namespace AnalysisForVotingRegions
             int count = 0;
             while (accountNames.Contains(accountName))
             {
-                string accountNameLastChar = accountName.Substring(accountName.Length - 1);
-                if (int.TryParse(accountNameLastChar, out count))
+                if (accountName.Length >= 13)
                 {
-                    count++;
-                    accountName = accountName.Substring(0, accountName.Length - 1) + count;
+                    string accountNameLastChar;
+                    if (count < 10)
+                    {
+                        accountNameLastChar = accountName.Substring(accountName.Length - 1);
+                    }
+                    else
+                    {
+                        accountNameLastChar = accountName.Substring(accountName.Length - 2);
+                    }
+
+
+                    if (int.TryParse(accountNameLastChar, out count))
+                    {
+                        count++;
+                        accountName = accountName.Substring(0, accountName.Length - accountNameLastChar.Length) + count;
+
+                    }
+                    else
+                    {
+                        count++;
+                        accountName = accountName.Substring(0, accountName.Length - accountNameLastChar.Length) + count.ToString(); ;
+                    }
                 } else
                 {
                     count++;
                     accountName = accountName + count.ToString(); ;
                 }
+                
             }
             SaveAccountNameToFile(accountName);
             return accountName;
