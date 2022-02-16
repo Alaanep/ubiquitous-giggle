@@ -47,7 +47,7 @@ namespace HideAndSeekTest
             Assert.AreEqual("You are in the Hallway. You see the following exits:" +
                 Environment.NewLine + " - the Bathroom is to the North" +
                 Environment.NewLine + " - the Living Room is to the South" +
-                Environment.NewLine + " - the Entry  is to the West" +
+                Environment.NewLine + " - the Entry is to the West" +
                 Environment.NewLine + " - the Kitchen is to the Northwest"+
                 Environment.NewLine + " - the Landing is Up", gameController.Status);
             Assert.AreEqual("Moving South", gameController.ParseInput("South"));
